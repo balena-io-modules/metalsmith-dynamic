@@ -1,0 +1,23 @@
+{
+  "name": "metalsmith-dynamic",
+  "version": "0.1.0",
+  "description": "Metalsmith dynamic documents plugin.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/resin-io-projects/metalsmith-dynamic.git"
+  },
+  "author": "Eugene Mirotin <eugene@resin.io>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/resin-io-projects/metalsmith-dynamic/issues"
+  },
+  "homepage": "https://github.com/resin-io-projects/metalsmith-dynamic",
+  "dependencies": {
+    "coffee-script": "^1.10.0",
+    "lodash": "^4.12.0"
+  }
+}
