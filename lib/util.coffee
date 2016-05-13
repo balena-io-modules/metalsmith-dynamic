@@ -17,7 +17,7 @@ exports.filenameToRef = (filename, ext) ->
   return ref
 
 exports.applyFn = (fn, fnArgs...) ->
-  (arg, ) ->
+  return (arg) ->
     return arg if not arg
     partialFn = _.partial(fn, _, fnArgs...)
 
