@@ -28,7 +28,7 @@ Having the file `src/a/path/to/file.ext` we call it's path without the source di
 
 > Why do we need this? When expanding the file over a set of variables we have to build the path for the newly injected files. Usually it's based on the original file path and variables values. Given the source file is `src/intro.md`, and having a single variable called `$language` you probably want the new files to be called like `src/intro-$language.md`, and not `src/intro.md-$language`.
 
-To expand the dynamic document you define **Variables**. Each `variable` matches a `dictionary` (currently only 1 variables can match each dictionary). When the document is expanded each `variable` is iterated over all the entries in the given dictionary.
+To expand the dynamic document you define **Variables**. Each `variable` matches a `dictionary` (currently only one variable can match each dictionary). When the document is expanded each `variable` is iterated over all the entries in the given dictionary.
 
 **Dictionary** is a named set of data. Technically each `dictionary` is an array of objects. Each object must have an `id` property (unique in the given dictionary) and can have any additional arbitrary properties. The first entry in the dictionary is considered `default`.
 
