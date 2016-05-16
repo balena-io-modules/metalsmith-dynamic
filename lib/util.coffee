@@ -1,3 +1,4 @@
+path = require('path')
 _ = require('lodash')
 
 exports.replacePlaceholders = (arg, context) ->
@@ -6,15 +7,15 @@ exports.replacePlaceholders = (arg, context) ->
     arg = arg.replace(re, value)
   return arg
 
-exports.refToFilename = (ref, ext) ->
-  return ref if not ext
-  return "#{ref}.#{ext}"
+exports.filenameToRef = (filename) ->
+  ext = path.extname(filename)
+  if ext
+    filename = filename[0...filename.length - ext.length]
+  return [ filename, ext ]
 
-exports.filenameToRef = (filename, ext) ->
-  return filename if not ext
-  extRe = new RegExp("\\.#{ext}$")
-  ref = filename.replace(extRe, '')
-  return ref
+exports.refToFilename = (ref, ext, addExt = true) ->
+  return ref if not (addExt and ext)
+  return "#{ref}#{ext}"
 
 exports.applyFn = (fn, fnArgs...) ->
   return (arg) ->

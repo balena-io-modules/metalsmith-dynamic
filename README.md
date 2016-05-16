@@ -49,13 +49,15 @@ The plugin will go over all files in your Metalsmith tree.
 
 It will look for those having `dynamic` key defined in their front-matter. The files that don't have it are left intact.
 
-Dynamic docs must define two properties under the dynamic key:
+Dynamic docs must define two properties under the dynamic key: `ref` and `variables`.
+Additionally an optional `skip_ext` can be set to `true`.
 
 ```
 ---
 dynamic:
   variables: [ $a, $b ]
   ref: $original_ref/$a/$b
+  skip_ext: false
 ---
 ```
 
@@ -67,10 +69,11 @@ The plugin does this:
 * removes this file from the tree and uses it as a template,
 * goes over each possible value for each of the variables (so if there are 2 entries in the dictionary `$a` and 5 entires in the dictionary `$b` there will be 10 possible combinations),
 * for each combination computes the `ref` for the new file by populating the `ref` format (with `$original_ref` and the values of the variables),
-* computes the new file path: `ref + config.docsExt` (see below for configuration options),
+* computes the new file path: `ref + $original_ext` if `skip_ext` is not set to falseish, or simply `ref` otherwise,
 * builds a new file object that has all the information from the original template file (including the content being left intact) extended with the following new properties:
 
   * `$original_ref` as defined above,
+  * `$original_ext` — the extension of the original filename in form of `.ext`, or an empty string if the filename didn't have an extension,
   * `$dictionaries` - the `Dicts` object built from the `config.dictionaries` (see **API** for details),
   * `$variables` - a key-value hash of the variables values for the chosen combination
   * `$ref_template` the `ref` from the document front-matter, with `$original_ref` replaced
@@ -95,7 +98,6 @@ Metalsmith(__dirname)
 .destination('dst')
 .use(dynamic({
   dictionaries: __dirname + 'dicts'
-  docsExt: 'md'
 }))
 ```
 
@@ -116,12 +118,6 @@ When it's a string the plugin will auto-discover dictionaries in the specified d
 When it's a hash object it's keys are dictionary names (and must start with `$`), and values should be arrays.
 
 Existing `Dicts` object is left intact.
-
-##### `docsExt`, _optional_.
-
-The extension (_without_ the dot) of the source files.
-
-If specified it will be stripped from the filename when calculating `$original_ref`, and added to the `ref` to compute the name of the resultant expanded document. See `refToFilename`, `filenameToRef` for more info.
 
 ##### `populateFields`, _optional_.
 
@@ -165,11 +161,11 @@ Returns all the default `id`s (as a hash) for all the dictionaries.
 
 `dynamic.util` stores utility functions used by the plugin.
 
-##### `util.refToFilename(ref, ext)`
-Default implementation, adds `.ext` to the `red`.
+##### `util.refToFilename(ref, ext, addExt)`
+Default implementation, adds `ext` to the `ref` unless `addExt` is set to `false`.
 
-##### `util.filenameToRef(file, ext)`
-Default implementation, remove `.ext` from the `file`.
+##### `util.filenameToRef(file)`
+Default implementation, removes extension from the `file`, returns a pair `[ ref, ext ]`.
 
 ##### `util.replacePlaceholders(str, context)`
 Populates the string using the provided context (key-value hash).

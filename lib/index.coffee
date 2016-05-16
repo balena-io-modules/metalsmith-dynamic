@@ -9,12 +9,12 @@ tokenize = applyFn(tokenize)
 
 expand = (files, options) ->
   dicts = Dicts(options.dictionaries)
-  { docsExt, refToFilename, filenameToRef } = options
+  { refToFilename, filenameToRef } = options
   refToFilename ?= util.refToFilename
   filenameToRef ?= util.filenameToRef
 
   buildSingleDoc = (templateObj, dynamicMeta, variablesContext) ->
-    { ref: refFormat } = dynamicMeta
+    { ref: refFormat, skip_ext: skipExt } = dynamicMeta
 
     refTemplate = replacePlaceholders(refFormat, {
       $original_ref: templateObj.$original_ref
@@ -40,7 +40,11 @@ expand = (files, options) ->
       for key in options.tokenizeFields
         obj[key] = tokenize(dynamicMeta[key])
 
-    key = refToFilename(populate(refTemplate), docsExt)
+    key = refToFilename(
+      populate(refTemplate),
+      templateObj.$original_ext,
+      not skipExt
+    )
     return { "#{key}": obj }
 
   buildDocsRec = (templateObj, dynamicMeta, variablesContext, remainingVariables) ->
@@ -78,8 +82,11 @@ expand = (files, options) ->
 
   buildDynamicDoc = (file, templateObj) ->
     console.log("Expanding dynamic doc #{file}")
-    originalRef = filenameToRef(file, docsExt)
-    templateObj = _.assign({ $original_ref: originalRef }, templateObj)
+    [ originalRef, originalExt ] = filenameToRef(file)
+    templateObj = _.assign({
+      $original_ref: originalRef
+      $original_ext: originalExt
+    }, templateObj)
     dynamicMeta = _.assign({}, templateObj.dynamic)
 
     { variables: variablesNames, ref: refFormat } = dynamicMeta
