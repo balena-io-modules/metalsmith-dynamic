@@ -1,3 +1,5 @@
+## 0.2.0
+
 **Breaking**:
 * `filenameToRef` signature changed: `filename -> [ ref, ext ]`
 * `refToFilename` signature changed: `(ref, ext, addExt = true)`. `addExt` is `false` when `dynamic.skip_ext` is set
