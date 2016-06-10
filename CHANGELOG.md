@@ -1,3 +1,8 @@
+## 0.3.0
+
+**Breaking**:
+* Dicts will now throw on unknown dictionary keys
+
 ## 0.2.0
 
 **Breaking**:
