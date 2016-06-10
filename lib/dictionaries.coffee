@@ -18,10 +18,10 @@ Dicts = (dictionaries) ->
   return
 
 Dicts::getDict = (key) ->
-  @_dicts[key]
+  @_dicts[key] or throw new Error("Unknown key #{key}")
 
 Dicts::getValues = (key) ->
-  _.map @_dicts[key], 'id'
+  _.map @getDict(key), 'id'
 
 Dicts::getDetails = (key, id) ->
   _.find @getDict(key), { id }
