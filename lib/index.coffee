@@ -54,7 +54,7 @@ expand = (files, options) ->
     result = {}
     [ nextVariable, remainingVariables... ] = remainingVariables
     if nextVariable?[0] isnt '$'
-      throw new Error("Variable name must start with $ sign \"#{nextVariable}\".")
+      throw new Error("Variable name must start with $ sign: \"#{nextVariable}\".")
 
     nextVariableDict = dicts.getDict(nextVariable)
     if not nextVariableDict
