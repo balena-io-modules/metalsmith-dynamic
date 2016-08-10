@@ -124,8 +124,6 @@ files = {
 
 plugin(dictionaries: dicts)(files, null, ->)
 
-console.log files
-
 assert.ok(files['prefix/a2/b3/my_file'])
 
 assert.equal(files['prefix/a2/b3/my_file'].$a_id, 'a2')
