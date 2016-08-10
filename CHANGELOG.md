@@ -1,3 +1,7 @@
+## 0.4.0
+**Potentially Breaking**:
+* Dict entry properties starting with `$` are now treated as FKs and will throw if do not match the desired format `$otherDict.ID`.
+
 ## 0.3.0
 
 **Breaking**:

@@ -32,6 +32,16 @@ To expand the dynamic document you define **Variables**. Each `variable` matches
 
 **Dictionary** is a named set of data. Technically each `dictionary` is an array of objects. Each object must have an `id` property (unique in the given dictionary) and can have any additional arbitrary properties. The first entry in the dictionary is considered `default`.
 
+Dictionary can also contain foreign keys that will be auto-expanded. The rules are:
+- any dictionary object can have any number of _top-level_ keys starting with `$`,
+- the corresponding values must be the strings of form `$otherDict.ID`,
+- where `otherDict` is the name of another dictionary, and `ID` is an ID of an object in that dictionary,
+- when the dictionaries are instantiated such values are replaced with the references to the corresponding objects in other dictionaries,
+- the values are referenced which makes it possible to have circular FKs,
+- if the referenced dictionary is not found or does not contain an object with the given ID an error is thrown.
+
+Example: If dictionary `$a` has an object with the property `$my_b: "$b.b1"`, the property will be replaced with a reference to an object in dictionary `$b` with an id of `b1`.
+
 **Population** of a string is the process of replacing variable placeholders with their specific values (`id`s from the corresponding dictionary).
 
 Sometimes you may also need a string to be **tokenized**. It's easier to explain with an example:

@@ -14,9 +14,51 @@ dicts = new plugin.Dicts
     { id: 'b3' }
   ]
 
-console.log '== Test Dicts =='
+console.log '== Test simple dicts =='
 
 assert.deepEqual(dicts.dictNames, [ '$a', '$b' ])
+
+
+
+console.log '== Test dicts FKs =='
+
+dictsWithExpansion = new plugin.Dicts
+  $a: [
+    { id: 'a1', $my_b: '$b.b1' }
+    { id: 'a2', $my_b: '$b.b2' }
+    { id: 'a3', $my_b: '$b.b3' }
+  ]
+  $b: [
+    { id: 'b1', name: 'b1' }
+    { id: 'b2', name: 'b2' }
+    { id: 'b3', name: 'b3' }
+  ]
+
+assert.deepEqual(dictsWithExpansion.getDetails('$a', 'a1').$my_b,
+  dictsWithExpansion.getDetails('$b', 'b1'))
+assert.deepEqual(dictsWithExpansion.getDetails('$a', 'a2').$my_b,
+  dictsWithExpansion.getDetails('$b', 'b2'))
+assert.deepEqual(dictsWithExpansion.getDetails('$a', 'a3').$my_b,
+  dictsWithExpansion.getDetails('$b', 'b3'))
+
+
+
+console.log '== Test dicts with circular FKs =='
+
+dictsWithExpansion = new plugin.Dicts
+  $a: [
+    { id: 'a1', $my_b: '$b.b1' }
+    { id: 'a2', $my_b: '$b.b2' }
+  ]
+  $b: [
+    { id: 'b1', $my_a: '$a.a1' }
+    { id: 'b2', $my_a: '$a.a2' }
+  ]
+
+assert.deepEqual(dictsWithExpansion.getDetails('$b', 'b1').$my_a,
+  dictsWithExpansion.getDetails('$a', 'a1'))
+assert.deepEqual(dictsWithExpansion.getDetails('$a', 'a2').$my_b,
+  dictsWithExpansion.getDetails('$b', 'b2'))
 
 
 
