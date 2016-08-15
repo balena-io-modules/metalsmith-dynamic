@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/resin-io-playground/metalsmith-dynamic.git"
+    "url": "git://github.com/resin-io-modules/metalsmith-dynamic.git"
   },
   "author": "Eugene Mirotin <eugene@resin.io>",
   "license": "Apache-2.0",
