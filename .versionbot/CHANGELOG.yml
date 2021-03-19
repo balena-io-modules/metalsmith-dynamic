@@ -1,4 +1,14 @@
 - commits:
+    - subject: Add missing prepare script
+      hash: 41490276c352c0c4bf19740617dba93e02c358c9
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+  version: 0.4.3
+  date: 2021-03-19T20:49:57.793Z
+- commits:
     - subject: Add .versionbot/CHANGELOG.yml for nested changelogs
       hash: 7a99f6df6d420d5be744151485d0e73144321094
       body: ''

@@ -4,6 +4,11 @@
 
 ## 0.3.0
 
+# v0.4.3
+## (2021-03-19)
+
+* Add missing prepare script [Pagan Gazzard]
+
 # v0.4.2
 ## (2021-03-19)
 
