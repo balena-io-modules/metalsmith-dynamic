@@ -4,6 +4,7 @@
   "description": "Metalsmith dynamic documents plugin.",
   "main": "index.js",
   "scripts": {
+    "prepare": "coffee -o build -c lib",
     "test": "coffee test/"
   },
   "repository": {
