@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-dynamic",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Metalsmith dynamic documents plugin.",
   "main": "index.js",
   "scripts": {

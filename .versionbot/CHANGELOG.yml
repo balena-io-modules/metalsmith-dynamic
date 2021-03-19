@@ -1,16 +1,26 @@
 - commits:
-  - author: Pagan Gazzard
-    body: This avoids the needs to compile on every run
-    footers:
-      change-type: patch
-    hash: d5b5f743d9d5cad2e42de9ae93a2a9ed05279542
-    subject: Build coffeescript files before publishing
-  date: "2021-03-19T19:10:10Z"
+    - subject: Add .versionbot/CHANGELOG.yml for nested changelogs
+      hash: 7a99f6df6d420d5be744151485d0e73144321094
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+  version: 0.4.2
+  date: 2021-03-19T19:22:21.615Z
+- commits:
+    - author: Pagan Gazzard
+      body: This avoids the needs to compile on every run
+      footers:
+        change-type: patch
+      hash: d5b5f743d9d5cad2e42de9ae93a2a9ed05279542
+      subject: Build coffeescript files before publishing
+  date: '2021-03-19T19:10:10Z'
   version: 0.4.1
 - commits:
-  - author: Eugene Mirotin
-    body: ""
-    hash: 4158ffd1e5e6700d114d46d4eea9e6487367a500
-    subject: autodetect files ext
-  date: "2016-05-16T10:11:23Z"
+    - author: Eugene Mirotin
+      body: ''
+      hash: 4158ffd1e5e6700d114d46d4eea9e6487367a500
+      subject: autodetect files ext
+  date: '2016-05-16T10:11:23Z'
   version: 0.2.0
