@@ -4,6 +4,11 @@
 
 ## 0.3.0
 
+# v0.4.1
+## (2021-03-19)
+
+* Build coffeescript files before publishing [Pagan Gazzard]
+
 **Breaking**:
 * Dicts will now throw on unknown dictionary keys
 
